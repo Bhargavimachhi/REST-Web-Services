@@ -6,16 +6,6 @@ const Chat=require("./public/chat.js");
 const port=8000;
 const mongoose=require("mongoose");
 
-main().then(()=>{
-    console.log("MongoDB connection successfull");
-}).catch((err)=>{
-    console.log("Failure");
-});
-
-async function main(){
-    mongoose.connect("mongodb://127.0.0.1:27017/whatsapp");
-}
-
 app.set("views",path.join(__dirname,"views"));
 app.set("view engine","ejs");
 
@@ -24,6 +14,16 @@ app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({extended :true}));
 app.use(express.json());
 app.use(methodOverride('_method'));
+
+async function main(){
+    mongoose.connect("mongodb://127.0.0.1:27017/whatsapp");
+}
+
+main().then(()=>{
+    console.log("MongoDB connection successfull");
+}).catch((err)=>{
+    console.log("Failure");
+});
 
 app.listen(port,()=>{
     console.log("Server Started");
@@ -61,9 +61,19 @@ app.post("/chats/new/add",(req,res)=>{
     });
 });
 
-app.get("/chats/:id",async (req,res)=>{
-    console.log("/chats/:id");
+app.get("/chats/:id/edit",async (req,res)=>{
     let {id}=req.params;
-    let chat=await Chat.findById(id);
-    res.render("view.ejs",{chat});
+    let chat =await Chat.findById(id);
+    res.render("edit.ejs",{chat});
+});
+
+app.put("/chats/:id",async (req,res)=>{
+    let {id}=req.params;
+    let {from : newfrom,to : newto,msg : newmsg}=req.body;
+    await Chat.findByIdAndUpdate(id,{
+        from : newfrom,
+        to : newto,
+        msg : newmsg,
+    },{runValidators : true , new :true});
+    res.redirect("/chats");
 });
