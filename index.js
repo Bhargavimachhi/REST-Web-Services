@@ -30,7 +30,7 @@ app.listen(port,()=>{
 });
 
 app.get("/",(req,res)=>{
-    res.redirect(`http://localhost:${port}/chats`);
+    res.redirect('/chats');
 });
 
 app.get("/chats", async (req,res)=>{
