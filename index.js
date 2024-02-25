@@ -19,6 +19,7 @@ async function main(){
 app.set("views",path.join(__dirname,"views"));
 app.set("view engine","ejs");
 
+app.use(express.static("public"));
 app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({extended :true}));
 app.use(express.json());
@@ -29,22 +30,36 @@ app.listen(port,()=>{
 });
 
 app.get("/chats", async (req,res)=>{
+    console.log("/chats");
     let chats=await Chat.find();
-    console.log(chats);
     res.render("index.ejs",{chats});
 });
 
 app.get("/chats/new",(req,res)=>{
+    console.log("/chats/new");
     res.render("new.ejs");
 });
 
 app.post("/chats/new/add",(req,res)=>{
-    let temp=req.body;
-    const chat=new Chat(temp);
+    console.log("/chats/new/add post");
+    let {from,to,msg}=req.body;
+    const chat=new Chat({
+        from : from,
+        to : to,
+        msg : msg,
+        date : new Date(),
+    });
 
     chat.save().then(()=>{
         res.redirect("/chats");
     }).catch((err)=>{
         res.send("Error Occurred !!! , Couldn't Add new Chat");
     });
+});
+
+app.get("/chats/:id",async (req,res)=>{
+    console.log("/chats/:id");
+    let {id}=req.params;
+    let chat=await Chat.findById(id);
+    res.render("view.ejs",{chat});
 });
