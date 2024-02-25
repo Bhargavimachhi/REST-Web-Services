@@ -77,3 +77,15 @@ app.put("/chats/:id",async (req,res)=>{
     },{runValidators : true , new :true});
     res.redirect("/chats");
 });
+
+app.get("/chats/:id/delete",async(req,res)=>{
+    let {id}=req.params;
+    let chat =await Chat.findById(id);
+    res.render("delete.ejs",{chat});
+})
+
+app.post("/chats/:id/delete",async(req,res)=>{
+    let {id}=req.params;
+    await Chat.findByIdAndDelete(id);
+    res.redirect("/chats");
+});
