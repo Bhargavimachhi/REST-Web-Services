@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Chat</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <h2>Edit Chat : </h2>
-    <form method="post" action="/chats/<%=chat.id%>?_method=PUT">
-        <input type="text" name="from" placeholder="From" value="<%=chat.from%>"><br><br>
-        <input type="text" name="to" placeholder="To" value="<%=chat.to%>"><br><br>
-        <textarea name="msg" placeholder="Enter Your Message" cols="60" rows="10"><%=chat.msg%></textarea><br><br>
-        <button> Edit Chat </button>
-    </form>
+    <div class="chat">
+        <form method="post" action="/chats/<%=chat.id%>?_method=PUT">
+            <input type="text" name="from" placeholder="From" value="<%=chat.from%>"><br><br>
+            <input type="text" name="to" placeholder="To" value="<%=chat.to%>"><br><br>
+            <textarea name="msg" placeholder="Enter Your Message" cols="60" rows="10"><%=chat.msg%></textarea><br><br>
+            <button> Edit Chat </button>
+        </form>
+    </div>
+    
 </body>
 </html>

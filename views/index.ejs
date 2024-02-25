@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chats</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <h2>All Chats</h2><br>
@@ -19,7 +19,7 @@
             <h2 class="to">To : <%= chat.to %></h2>
             <p class="msg"> Message : <%= chat.msg %></p>
             <div style="display: flex;">
-                <form method="get" action="/chats/<%= chat._id %>"><button> View In Detail </button></form> &nbsp;
+                <form method="get" action="/chats/<%= chat._id %>/view"><button> View In Detail </button></form> &nbsp;
                 <form method="get" action="/chats/<%= chat._id %>/edit"><button> Edit Chat </button></form>&nbsp;
                 <form method="get" action="/chats/<%= chat._id %>/delete"><button> Delete Chat </button></form>&nbsp;
             </div>

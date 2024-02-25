@@ -4,17 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Chat</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <h2> Chat : </h2>
     <div class="chat">
-        <% for(let c of chat){ %>
-            <h2 class="from">From : <%= c.from %></h2>
-            <h2 class="to">To : <%= c.to %></h2>
-            <p class="msg"> Message : <%= c.msg %></p>
-        <% } %>
-        
+        <h2 class="from">From : <%= chat.from %></h2>
+        <h2 class="to">To : <%= chat.to %></h2>
+        <p class="msg"> Message : <%= chat.msg %></p>
     </div><br>
 </body>
 </html>

@@ -34,18 +34,15 @@ app.get("/",(req,res)=>{
 });
 
 app.get("/chats", async (req,res)=>{
-    console.log("/chats");
     let chats=await Chat.find();
     res.render("index.ejs",{chats});
 });
 
 app.get("/chats/new",(req,res)=>{
-    console.log("/chats/new");
     res.render("new.ejs");
 });
 
 app.post("/chats/new/add",(req,res)=>{
-    console.log("/chats/new/add post");
     let {from,to,msg}=req.body;
     const chat=new Chat({
         from : from,
@@ -59,6 +56,13 @@ app.post("/chats/new/add",(req,res)=>{
     }).catch((err)=>{
         res.send("Error Occurred !!! , Couldn't Add new Chat");
     });
+});
+
+app.get("/chats/:id/view",async(req,res)=>{
+    let {id}=req.params;
+    let chat =await Chat.findById(id);
+    // console.log(chat);
+    res.render("view.ejs",{chat});
 });
 
 app.get("/chats/:id/edit",async (req,res)=>{
