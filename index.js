@@ -29,6 +29,10 @@ app.listen(port,()=>{
     console.log("Server Started");
 });
 
+app.get("/",(req,res)=>{
+    res.redirect(`http://localhost:${port}/chats`);
+});
+
 app.get("/chats", async (req,res)=>{
     console.log("/chats");
     let chats=await Chat.find();
