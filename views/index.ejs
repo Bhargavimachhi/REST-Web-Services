@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chats</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-    <h2>All Chats</h2><br>
-    <form method="get" action="/chats/new">
-        <button> New Chat </button>
-    </form>
-    <br><br>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <h2>All Chats</h2>
+    <div style="text-align: center; margin-bottom: 2rem">
+      <form method="get" action="/chats/new">
+        <button>➕ New Chat</button>
+      </form>
+    </div>
 
     <% for(let chat of chats){ %>
-        <div class="chat">
-            <h2 class="from">From : <%= chat.from %></h2>
-            <h2 class="to">To : <%= chat.to %></h2>
-            <p class="msg"> Message : <%= chat.msg %></p>
-            <div style="display: flex;">
-                <form method="get" action="/chats/<%= chat._id %>/view"><button> View In Detail </button></form> &nbsp;
-                <form method="get" action="/chats/<%= chat._id %>/edit"><button> Edit Chat </button></form>&nbsp;
-                <form method="get" action="/chats/<%= chat._id %>/delete"><button> Delete Chat </button></form>&nbsp;
-            </div>
-        </div><br>
+    <div class="chat">
+      <h2 class="from">From: <%= chat.from %></h2>
+      <h2 class="to">To: <%= chat.to %></h2>
+      <p class="msg">Message: <%= chat.msg %></p>
+      <div>
+        <form method="get" action="/chats/<%= chat._id %>/view">
+          <button>👁 View</button>
+        </form>
+        <form method="get" action="/chats/<%= chat._id %>/edit">
+          <button>✏️ Edit</button>
+        </form>
+        <form method="get" action="/chats/<%= chat._id %>/delete">
+          <button>🗑 Delete</button>
+        </form>
+      </div>
+    </div>
     <% } %>
-</body>
+  </body>
 </html>
